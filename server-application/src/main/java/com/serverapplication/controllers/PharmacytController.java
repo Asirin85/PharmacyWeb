@@ -2,35 +2,43 @@ package com.serverapplication.controllers;
 
 import com.serverapplication.domain.Pharmacyt;
 import com.serverapplication.services.PharmacytService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/phar")
 public class PharmacytController {
-    @Autowired
+
     private PharmacytService pharmacytService;
+
+    public PharmacytController(PharmacytService pharmacytService) {
+        this.pharmacytService = pharmacytService;
+    }
+
+    @GetMapping(value = "{id}")
+    public Pharmacyt getOne(@PathVariable("id") Long id) {
+        return pharmacytService.getById(id);
+    }
+
     @GetMapping
-    public List<Pharmacyt> phar(){
+    public List<Pharmacyt> phar() {
         return pharmacytService.getAll();
     }
+
     @PostMapping
-    public List<Pharmacyt> addPhar(@RequestParam String work_start, @RequestParam String work_end, @RequestParam String phone_num, @RequestParam String comp_name,
-                          @RequestParam String address, @RequestParam Integer phar_numb){
-        Pharmacyt pharmacyt = new Pharmacyt(work_start, work_end, phone_num, comp_name, address, phar_numb);
-        pharmacytService.save(pharmacyt);
-        return pharmacytService.getAll();
+    public List<Pharmacyt> addPhar(@RequestBody Pharmacyt pharmacyt) {
+        return pharmacytService.save(pharmacyt);
     }
+
     @DeleteMapping(value = "{id}")
-    public List<Pharmacyt> delAvail(@PathVariable("id") Long id){
-        pharmacytService.delete(id);
-        return  pharmacytService.getAll();
+    public List<Pharmacyt> delAvail(@PathVariable("id") Long id) {
+        return pharmacytService.delete(id);
     }
+
     @PutMapping
-    public List<Pharmacyt> updAvail(@RequestBody Pharmacyt pharmacyt){
-        pharmacytService.save(pharmacyt);
-        return pharmacytService.getAll();
+    public List<Pharmacyt> updAvail(@RequestBody Pharmacyt pharmacyt) {
+        return pharmacytService.update(pharmacyt);
     }
 }

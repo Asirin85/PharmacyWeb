@@ -1,5 +1,7 @@
 package com.serverapplication.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,11 +12,12 @@ import java.sql.Date;
 public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id_med;
+    private Long id_med;
 
     private String med_name;
     private String med_category;
     private String med_rel_form;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date expiration_date;
 
     public Medicine() {

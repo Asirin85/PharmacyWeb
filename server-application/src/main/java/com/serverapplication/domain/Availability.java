@@ -1,5 +1,7 @@
 package com.serverapplication.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,7 @@ public class Availability {
     private Integer id_phar_fk;
     private Integer price;
     private Integer amount;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date receipt_date;
 
     public Availability() {
