@@ -1,0 +1,28 @@
+<div class="container">
+  <h1 class="text-center">Список лекарств</h1>
+  <div class="container row justify-content-center">
+    <table class="table table-bordered">
+      <thead class="thead-dark no-wrap">
+      <tr>
+        <th>ID лекарства</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Форма выпуска</th>
+        <th>Срок годности</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="medicines">
+        <td>{{medicines.id_med}}</td>
+        <td><input [(ngModel)]="medicines.med_name" placeholder="Название лекарства"></td>
+        <td><input [(ngModel)]="medicines.med_category" placeholder="Категория лекарства"></td>
+        <td><input [(ngModel)]="medicines.med_rel_form" placeholder="Форма выпуска"></td>
+        <td><input [(ngModel)]="medicines.expiration_date" placeholder="Срок годности"></td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-outline-secondary" (click)="save()">Сохранить</button>
+    <button class="btn btn-outline-secondary btn-buffer" (click)="this.router.navigate(['/med'])">Назад</button>
+    <button class="btn btn-outline-secondary" (click)="delete()">Удалить</button>
+  </div>
+</div>

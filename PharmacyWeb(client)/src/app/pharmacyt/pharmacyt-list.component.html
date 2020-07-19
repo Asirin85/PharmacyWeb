@@ -1,0 +1,36 @@
+<div class="container">
+  <h1 class="text-center">Список аптек</h1>
+  <div class="container row justify-content-center" [hidden]="!authenticated()">
+    <button class="btn btn-outline-secondary" (click)="router.navigate(['/phar/add'])">Добавить</button>
+    <table class="table table-bordered table-hover top-buffer">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID аптеки</th>
+        <th>Номер аптеки</th>
+        <th>Компания</th>
+        <th>Адрес</th>
+        <th>Номер телефона</th>
+        <th>Начало работы</th>
+        <th>Окончание работы</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pharmacyt of pharmacyts" (click)="router.navigate(['/phar/'+pharmacyt.id_phar])">
+        <td>{{pharmacyt.id_phar}}</td>
+        <td>{{pharmacyt.phar_numb}}</td>
+        <td>{{pharmacyt.comp_name}}</td>
+        <td>{{pharmacyt.address}}</td>
+        <td>{{pharmacyt.phone_num}}</td>
+        <td>{{pharmacyt.work_start}}</td>
+        <td>{{pharmacyt.work_end}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div [hidden]="authenticated()">
+    <h6 class="text-center">Войдите, чтобы увидеть базу данных</h6>
+  </div>
+</div>
+
+
+

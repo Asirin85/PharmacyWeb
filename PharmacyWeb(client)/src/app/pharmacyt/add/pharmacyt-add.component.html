@@ -1,0 +1,30 @@
+<div class="container">
+  <h1 class="text-center">Список аптек</h1>
+  <div class="container row justify-content-center">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>Номер аптеки</th>
+        <th>Компания</th>
+        <th>Адрес</th>
+        <th>Номер телефона</th>
+        <th>Начало работы</th>
+        <th>Окончание работы</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><input [(ngModel)]="pharmacyts.phar_numb" placeholder="Номер аптеки"></td>
+        <td><input [(ngModel)]="pharmacyts.comp_name" placeholder="Компания"></td>
+        <td><input [(ngModel)]="pharmacyts.address" placeholder="Адрес"></td>
+        <td><input [(ngModel)]="pharmacyts.phone_num" placeholder="Номер телефона"></td>
+        <td><input [(ngModel)]="pharmacyts.work_start" placeholder="Начало работы"></td>
+        <td><input [(ngModel)]="pharmacyts.work_end" placeholder="Окончание работы"></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-outline-secondary" (click)="add()">Добавить</button>
+    <button class="btn btn-outline-secondary btn-buffer" (click)="this.router.navigate(['phar'])">Назад</button>
+  </div>
+</div>

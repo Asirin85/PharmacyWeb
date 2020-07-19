@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="text-center">Наличие лекарств</h1>
+  <div class="container row justify-content-center" [hidden]="!authenticated()">
+    <button class="btn btn-outline-secondary" (click)="router.navigate(['/avail/add'])">Добавить</button>
+    <table class="table table-bordered table-hover top-buffer">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID записи</th>
+        <th>ID лекарства</th>
+        <th>ID аптеки</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Дата поступления</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let availability of availabilities" (click)="router.navigate(['/avail/'+availability.id_rec])">
+        <td>{{availability.id_rec}} </td>
+        <td>{{availability.id_med_fk}}</td>
+        <td>{{availability.id_phar_fk}}</td>
+        <td>{{availability.price}}</td>
+        <td>{{availability.amount}}</td>
+        <td>{{availability.receipt_date}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div [hidden]="authenticated()">
+    <h6 class="text-center">Войдите, чтобы увидеть базу данных</h6>
+  </div>
+</div>
