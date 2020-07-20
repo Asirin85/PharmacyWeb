@@ -1,6 +1,9 @@
 <div class="container">
   <form role="form" (submit)="login()" [hidden]="authenticated()">
-    <h5 class="container row justify-content-center">Введите данные для входа:</h5>
+    <h5 class="container row justify-content-center top-buffer">Введите данные для входа:</h5>
+    <div [hidden]="this.success">
+      <h5 class="text-danger">Ошибка входа в систему, проверьте правильность введенных данных:</h5>
+    </div>
     <div class="form-group">
       <label for="username">Имя пользователя:</label> <input type="text"
                                                              class="form-control" id="username" name="username"
@@ -12,7 +15,9 @@
                                                    [(ngModel)]="credentials.password"/>
     </div>
     <button type="submit" class="btn btn-secondary">Войти</button>
+
   </form>
+
   <div class="container row justify-content-center" [hidden]="!authenticated()">
     <h5 class="container row justify-content-center">Нажмите, чтобы выйти из приложения</h5>
     <button class="btn btn-dark" (click)="logout()">Выйти</button>
