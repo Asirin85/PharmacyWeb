@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ConstLib} from '../const.lib';
-import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticateService {

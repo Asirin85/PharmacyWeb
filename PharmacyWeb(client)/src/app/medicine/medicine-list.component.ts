@@ -27,5 +27,4 @@ export class MedicineListComponent implements OnInit {
   authenticated() {
     return this.auth.isUserLoggedIn();
   }
-
 }

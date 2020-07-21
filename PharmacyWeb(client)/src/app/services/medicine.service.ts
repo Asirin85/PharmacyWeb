@@ -29,4 +29,3 @@ export class MedicineService {
     return this.http.post(ConstLib.WEB_URL + '/med', medicine);
   }
 }
-

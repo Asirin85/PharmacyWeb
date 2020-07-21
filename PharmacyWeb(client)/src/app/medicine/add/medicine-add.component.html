@@ -1,6 +1,7 @@
 <div class="container">
   <h1 class="text-center">Список лекарств</h1>
   <div class="container row justify-content-center">
+    <h5 class="text-danger" [hidden]="!error">Ошибка добавления данных, проверьте правильность введенных данных:</h5>
     <table class="table table-bordered">
       <thead class="thead-dark">
       <tr>

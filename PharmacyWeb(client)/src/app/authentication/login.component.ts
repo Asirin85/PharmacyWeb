@@ -18,16 +18,14 @@ export class LoginComponent {
   }
 
   login() {
-
     this.auth.authenticate(this.credentials).subscribe((result) => {
-        sessionStorage.setItem('username', this.credentials.username);
-        sessionStorage.setItem('token', 'Basic ' + btoa(this.credentials.username + ':' + this.credentials.password));
-        this.router.navigateByUrl('/');
-        this.success = true;
-    },()=>{
+      sessionStorage.setItem('username', this.credentials.username);
+      sessionStorage.setItem('token', 'Basic ' + btoa(this.credentials.username + ':' + this.credentials.password));
+      this.router.navigateByUrl('/');
+      this.success = true;
+    }, () => {
       this.success = false;
     });
-
   }
 
   authenticated() {

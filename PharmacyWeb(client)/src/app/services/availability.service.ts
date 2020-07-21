@@ -29,5 +29,3 @@ export class AvailabilityService {
     return this.http.post(ConstLib.WEB_URL + '/avail', availability);
   }
 }
-
-

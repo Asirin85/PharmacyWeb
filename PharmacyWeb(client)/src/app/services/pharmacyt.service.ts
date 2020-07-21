@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {ConstLib} from '../const.lib';
 import {Pharmacyt} from '../models/pharmacyt';
 
@@ -29,4 +29,3 @@ export class PharmacytService {
     return this.http.post(ConstLib.WEB_URL + '/phar', pharmacyt);
   }
 }
-
