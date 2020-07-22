@@ -1,0 +1,13 @@
+.nav-pills .pill-color .nav-link {
+  background-color: rgb(45, 45, 45) !important;
+}
+
+.nav-pills .pill-color .nav-link:not(.active) {
+  background-color: white !important;
+  color: black !important;
+}
+
+.top-left-m {
+  margin-top: 5px;
+  margin-left: 5px;
+}

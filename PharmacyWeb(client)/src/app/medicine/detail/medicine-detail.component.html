@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="text-center">Список лекарств</h1>
+  <div class="container row justify-content-center">
+    <h5 class="text-danger" [hidden]="!updError">Ошибка изменения данных, проверьте правильность введенных данных:</h5>
+    <h5 class="text-danger" [hidden]="!delError">Ошибка удаления данных, существует связь с другим списком </h5>
+    <table class="table table-bordered">
+      <thead class="thead-dark no-wrap">
+      <tr>
+        <th>ID лекарства</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Форма выпуска</th>
+        <th>Срок годности</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="medicines">
+        <td>{{medicines.idMed}}</td>
+        <td><input [(ngModel)]="medicines.medName" placeholder="Название лекарства"></td>
+        <td><input [(ngModel)]="medicines.medCategory" placeholder="Категория лекарства"></td>
+        <td><input [(ngModel)]="medicines.medRelForm" placeholder="Форма выпуска"></td>
+        <td><input [(ngModel)]="date" type="text" ngbDatepicker #d="ngbDatepicker"/>
+          <button class="btn btn-outline-secondary btn-sm btn-margin" (click)="d.toggle()">Date</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-outline-secondary" (click)="save()">Сохранить</button>
+    <button class="btn btn-outline-secondary btn-buffer" (click)="this.router.navigate(['/med'])">Назад</button>
+    <button class="btn btn-outline-secondary" (click)="delete()">Удалить</button>
+  </div>
+</div>

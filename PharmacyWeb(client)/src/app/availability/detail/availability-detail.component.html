@@ -1,0 +1,34 @@
+<div class="container">
+  <h1 class="text-center">Наличие лекарств</h1>
+  <div class="container row justify-content-center">
+    <h5 class="text-danger" [hidden]="!updError">Ошибка изменения данных, проверьте правильность введенных данных:</h5>
+    <h5 class="text-danger" [hidden]="!delError">Ошибка удаления данных, существует связь с другим списком </h5>
+    <table class="table table-bordered">
+      <thead class="thead-dark no-wrap">
+      <tr>
+        <th>ID записи</th>
+        <th>ID лекарства</th>
+        <th>ID аптеки</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Дата поступления</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="availabilities">
+        <td>{{availabilities.idRec}}</td>
+        <td><input [(ngModel)]="availabilities.idMed" placeholder="ID лекарства"></td>
+        <td><input [(ngModel)]="availabilities.idPhar" placeholder="ID аптеки"></td>
+        <td><input [(ngModel)]="availabilities.price" placeholder="Цена"></td>
+        <td><input size="8" [(ngModel)]="availabilities.amount" placeholder="Количество"></td>
+        <td><input size="8" [(ngModel)]="date" type="text" ngbDatepicker #d="ngbDatepicker"/>
+          <button class="btn btn-outline-secondary btn-margin btn-sm" (click)="d.toggle()">Date</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-outline-secondary" (click)="save()">Сохранить</button>
+    <button class="btn btn-outline-secondary btn-buffer" (click)="this.router.navigate(['/avail']);">Назад</button>
+    <button class="btn btn-outline-secondary" (click)="delete()">Удалить</button>
+  </div>
+</div>
