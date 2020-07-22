@@ -1,9 +1,13 @@
 package com.serverapplication.services;
 
+import com.serverapplication.domain.Availability;
 import com.serverapplication.domain.Medicine;
+import com.serverapplication.modelsAPI.MedicineAPI;
 import com.serverapplication.repos.MedicineRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,31 +20,55 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine getById(Long id) {
-        return medicineRepo.findById(id).get();
+    public MedicineAPI getById(Long id) {
+        return convertToAPI(medicineRepo.findById(id).get());
     }
 
     @Override
-    public List<Medicine> save(Medicine medicines) {
-        Medicine medicineAdd = new Medicine(medicines.getMed_name(), medicines.getMed_category(), medicines.getMed_rel_form(), medicines.getExpiration_date());
-        medicineRepo.save(medicineAdd);
+    public List<MedicineAPI> save(MedicineAPI medicineAPI) {
+        medicineRepo.save(convertToEntity(medicineAPI));
         return getAll();
     }
 
     @Override
-    public List<Medicine> update(Medicine medicine) {
-        medicineRepo.save(medicine);
+    public List<MedicineAPI> update(MedicineAPI medicineAPI) {
+        medicineRepo.save(convertToEntity(medicineAPI));
         return getAll();
     }
 
+    ModelMapper modelMapper = new ModelMapper();
+
     @Override
-    public List<Medicine> delete(Long id) {
+    public Medicine convertToEntity(MedicineAPI medicineAPI) {
+        Medicine medicine = modelMapper.map(medicineAPI, Medicine.class);
+        if (medicineAPI.getIdMed() != null) {
+            medicine.setIdMed(medicineAPI.getIdMed());
+            Medicine oldMed = medicineRepo.findById(medicineAPI.getIdMed()).get();
+            for (Availability availability : oldMed.getAvailabilities()) {
+                medicine.addAvailabilities(availability);
+            }
+        }
+        return medicine;
+    }
+
+    @Override
+    public MedicineAPI convertToAPI(Medicine medicine) {
+        MedicineAPI medicineAPI = modelMapper.map(medicine, MedicineAPI.class);
+        return medicineAPI;
+    }
+
+    @Override
+    public List<MedicineAPI> delete(Long id) {
         medicineRepo.deleteById(id);
         return getAll();
     }
 
     @Override
-    public List<Medicine> getAll() {
-        return medicineRepo.findAll();
+    public List<MedicineAPI> getAll() {
+        List<MedicineAPI> medicineAPIList = new ArrayList<>();
+        for (Medicine medicine: medicineRepo.findAll()) {
+            medicineAPIList.add(convertToAPI(medicine));
+        }
+        return medicineAPIList;
     }
 }

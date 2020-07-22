@@ -1,17 +1,22 @@
 package com.serverapplication.services;
 
 import com.serverapplication.domain.Pharmacyt;
+import com.serverapplication.modelsAPI.PharmacytAPI;
 
 import java.util.List;
 
 public interface PharmacytService {
-    Pharmacyt getById(Long id);
+    PharmacytAPI getById(Long id);
 
-    List<Pharmacyt> save(Pharmacyt pharmacyt);
+    List<PharmacytAPI> save(PharmacytAPI pharmacytAPI);
 
-    List<Pharmacyt> delete(Long id);
+    List<PharmacytAPI> delete(Long id);
 
-    List<Pharmacyt> getAll();
+    List<PharmacytAPI> getAll();
 
-    List<Pharmacyt> update(Pharmacyt pharmacyt);
+    List<PharmacytAPI> update(PharmacytAPI pharmacytAPI);
+
+    PharmacytAPI convertToAPI(Pharmacyt pharmacyt);
+
+    Pharmacyt convertToEntity(PharmacytAPI pharmacytAPI);
 }

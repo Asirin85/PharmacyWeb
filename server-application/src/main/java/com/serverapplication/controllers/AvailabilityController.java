@@ -1,6 +1,6 @@
 package com.serverapplication.controllers;
 
-import com.serverapplication.domain.Availability;
+import com.serverapplication.modelsAPI.AvailabilityAPI;
 import com.serverapplication.services.AvailabilityService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +18,27 @@ public class AvailabilityController {
     }
 
     @GetMapping(value = "{id}")
-    public Availability getOne(@PathVariable("id") Long id) {
+    public AvailabilityAPI getOne(@PathVariable("id") Long id) {
         return availabilityService.getById(id);
     }
 
     @GetMapping
-    public List<Availability> avail() {
+    public List<AvailabilityAPI> avail() {
         return availabilityService.getAll();
     }
 
     @PostMapping
-    public List<Availability> addAvail(@RequestBody Availability availability) {
-        return availabilityService.save(availability);
+    public List<AvailabilityAPI> addAvail(@RequestBody AvailabilityAPI availabilityAPI) {
+        return availabilityService.save(availabilityAPI);
     }
 
     @DeleteMapping(value = "{id}")
-    public List<Availability> delAvail(@PathVariable("id") Long id) {
+    public List<AvailabilityAPI> delAvail(@PathVariable("id") Long id) {
         return availabilityService.delete(id);
     }
 
     @PutMapping
-    public List<Availability> updAvail(@RequestBody Availability availability) {
-        return availabilityService.update(availability);
+    public List<AvailabilityAPI> updAvail(@RequestBody AvailabilityAPI availabilityAPI) {
+        return availabilityService.update(availabilityAPI);
     }
 }

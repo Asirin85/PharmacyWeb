@@ -1,6 +1,6 @@
 package com.serverapplication.controllers;
 
-import com.serverapplication.domain.Pharmacyt;
+import com.serverapplication.modelsAPI.PharmacytAPI;
 import com.serverapplication.services.PharmacytService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +18,27 @@ public class PharmacytController {
     }
 
     @GetMapping(value = "{id}")
-    public Pharmacyt getOne(@PathVariable("id") Long id) {
+    public PharmacytAPI getOne(@PathVariable("id") Long id) {
         return pharmacytService.getById(id);
     }
 
     @GetMapping
-    public List<Pharmacyt> phar() {
+    public List<PharmacytAPI> phar() {
         return pharmacytService.getAll();
     }
 
     @PostMapping
-    public List<Pharmacyt> addPhar(@RequestBody Pharmacyt pharmacyt) {
-        return pharmacytService.save(pharmacyt);
+    public List<PharmacytAPI> addPhar(@RequestBody PharmacytAPI pharmacytAPI) {
+        return pharmacytService.save(pharmacytAPI);
     }
 
     @DeleteMapping(value = "{id}")
-    public List<Pharmacyt> delAvail(@PathVariable("id") Long id) {
+    public List<PharmacytAPI> delAvail(@PathVariable("id") Long id) {
         return pharmacytService.delete(id);
     }
 
     @PutMapping
-    public List<Pharmacyt> updAvail(@RequestBody Pharmacyt pharmacyt) {
-        return pharmacytService.update(pharmacyt);
+    public List<PharmacytAPI> updAvail(@RequestBody PharmacytAPI pharmacytAPI) {
+        return pharmacytService.update(pharmacytAPI);
     }
 }

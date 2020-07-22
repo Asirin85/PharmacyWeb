@@ -1,9 +1,13 @@
 package com.serverapplication.services;
 
+import com.serverapplication.domain.Availability;
 import com.serverapplication.domain.Pharmacyt;
+import com.serverapplication.modelsAPI.PharmacytAPI;
 import com.serverapplication.repos.PharmacytRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,30 +19,55 @@ public class PharmacytServiceImpl implements PharmacytService {
     }
 
     @Override
-    public Pharmacyt getById(Long id) {
-        return pharmacytRepo.findById(id).get();
+    public PharmacytAPI getById(Long id) {
+        return convertToAPI(pharmacytRepo.findById(id).get());
     }
 
     @Override
-    public List<Pharmacyt> save(Pharmacyt pharmacyt) {
-        pharmacytRepo.save(pharmacyt);
+    public List<PharmacytAPI> save(PharmacytAPI pharmacytAPI) {
+        pharmacytRepo.save(convertToEntity(pharmacytAPI));
         return getAll();
     }
 
     @Override
-    public List<Pharmacyt> update(Pharmacyt pharmacyt) {
-        pharmacytRepo.save(pharmacyt);
+    public List<PharmacytAPI> update(PharmacytAPI pharmacytAPI) {
+        pharmacytRepo.save(convertToEntity(pharmacytAPI));
         return getAll();
     }
 
     @Override
-    public List<Pharmacyt> delete(Long id) {
+    public List<PharmacytAPI> delete(Long id) {
         pharmacytRepo.deleteById(id);
         return getAll();
     }
 
     @Override
-    public List<Pharmacyt> getAll() {
-        return pharmacytRepo.findAll();
+    public List<PharmacytAPI> getAll() {
+        List<PharmacytAPI> pharmacytAPIList = new ArrayList<>();
+        for (Pharmacyt pharmacyt: pharmacytRepo.findAll()) {
+            pharmacytAPIList.add(convertToAPI(pharmacyt));
+        }
+        return pharmacytAPIList;
+    }
+
+    ModelMapper modelMapper = new ModelMapper();
+
+    @Override
+    public Pharmacyt convertToEntity(PharmacytAPI pharmacytAPI) {
+        Pharmacyt pharmacyt = modelMapper.map(pharmacytAPI, Pharmacyt.class);
+        if (pharmacytAPI.getIdPhar() != null) {
+            pharmacyt.setIdPhar(pharmacytAPI.getIdPhar());
+            Pharmacyt oldPhar = pharmacytRepo.findById(pharmacytAPI.getIdPhar()).get();
+            for (Availability availability : oldPhar.getAvailabilities()) {
+                pharmacyt.addAvailabilities(availability);
+            }
+        }
+        return pharmacyt;
+    }
+
+    @Override
+    public PharmacytAPI convertToAPI(Pharmacyt pharmacyt) {
+        PharmacytAPI pharmacytAPI = modelMapper.map(pharmacyt, PharmacytAPI.class);
+        return pharmacytAPI;
     }
 }

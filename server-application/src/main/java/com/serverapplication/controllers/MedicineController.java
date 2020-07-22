@@ -1,6 +1,6 @@
 package com.serverapplication.controllers;
 
-import com.serverapplication.domain.Medicine;
+import com.serverapplication.modelsAPI.MedicineAPI;
 import com.serverapplication.services.MedicineService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +18,27 @@ public class MedicineController {
     }
 
     @GetMapping(value = "{id}")
-    public Medicine getOne(@PathVariable("id") Long id) {
+    public MedicineAPI getOne(@PathVariable("id") Long id) {
         return medicineService.getById(id);
     }
 
     @GetMapping
-    public List<Medicine> med() {
+    public List<MedicineAPI> med() {
         return medicineService.getAll();
     }
 
     @PostMapping
-    public List<Medicine> addMed(@RequestBody Medicine medicines) {
-        return medicineService.save(medicines);
+    public List<MedicineAPI> addMed(@RequestBody MedicineAPI medicineAPI) {
+        return medicineService.save(medicineAPI);
     }
 
     @DeleteMapping(value = "{id}")
-    public List<Medicine> delAvail(@PathVariable("id") Long id) {
+    public List<MedicineAPI> delAvail(@PathVariable("id") Long id) {
         return medicineService.delete(id);
     }
 
     @PutMapping
-    public List<Medicine> updAvail(@RequestBody Medicine medicine) {
-        return medicineService.update(medicine);
+    public List<MedicineAPI> updAvail(@RequestBody MedicineAPI medicineAPI) {
+        return medicineService.update(medicineAPI);
     }
 }

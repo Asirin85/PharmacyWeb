@@ -1,59 +1,93 @@
 package com.serverapplication.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class Availability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_rec;
+    private Long idRec;
 
-    private Integer id_med_fk;
-    private Integer id_phar_fk;
     private Integer price;
     private Integer amount;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date receipt_date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_phar_fk")
+    @JsonBackReference
+    private Pharmacyt pharmacyt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_med_fk")
+    @JsonBackReference
+    private Medicine medicine;
+
+
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Samara")
+    private Date receiptDate;
 
     public Availability() {
     }
 
-    public Availability(Integer id_med_fk, Integer id_phar_fk, Integer price, Integer amount, Date receipt_date) {
-        this.id_med_fk = id_med_fk;
-        this.id_phar_fk = id_phar_fk;
+    public Availability(Integer price, Integer amount, Date receiptDate, Medicine medicine, Pharmacyt pharmacyt) {
         this.price = price;
         this.amount = amount;
-        this.receipt_date = receipt_date;
+        this.receiptDate = receiptDate;
+        this.medicine = medicine;
+        this.pharmacyt = pharmacyt;
     }
 
-    public Long getId_rec() {
-        return id_rec;
+
+    public Medicine getMedicine() {
+        return medicine;
     }
 
-    public void setId_rec(Long id_rec) {
-        this.id_rec = id_rec;
+    public void setMedicine(Medicine medicine) {
+        if (sameAsFormerMedicine(medicine)) return;
+        Medicine oldMedicine = this.medicine;
+        this.medicine = medicine;
+        if (oldMedicine != null) {
+            oldMedicine.removeAvailabilities(this);
+        }
+        if (medicine != null) {
+            medicine.addAvailabilities(this);
+        }
     }
 
-    public Integer getId_med_fk() {
-        return id_med_fk;
+    private boolean sameAsFormerMedicine(Medicine newMedicine) {
+        return medicine == null ? newMedicine == null : medicine.equals(newMedicine);
     }
 
-    public void setId_med_fk(Integer id_med_fk) {
-        this.id_med_fk = id_med_fk;
+    public Pharmacyt getPharmacyt() {
+        return pharmacyt;
     }
 
-    public Integer getId_phar_fk() {
-        return id_phar_fk;
+    public void setPharmacyt(Pharmacyt pharmacyt) {
+        if (sameAsFormerPharmacyt(pharmacyt)) return;
+        Pharmacyt oldPharmacyt = this.pharmacyt;
+        this.pharmacyt = pharmacyt;
+        if (oldPharmacyt != null) {
+            oldPharmacyt.removeAvailabilities(this);
+        }
+        if (pharmacyt != null) {
+            pharmacyt.addAvailabilities(this);
+        }
     }
 
-    public void setId_phar_fk(Integer id_phar_fk) {
-        this.id_phar_fk = id_phar_fk;
+    private boolean sameAsFormerPharmacyt(Pharmacyt newPharmacyt) {
+        return pharmacyt == null ? newPharmacyt == null : pharmacyt.equals(newPharmacyt);
+    }
+
+    public Long getIdRec() {
+        return idRec;
+    }
+
+    public void setIdRec(Long idRec) {
+        this.idRec = idRec;
     }
 
     public Integer getPrice() {
@@ -72,11 +106,11 @@ public class Availability {
         this.amount = amount;
     }
 
-    public Date getReceipt_date() {
-        return receipt_date;
+    public Date getReceiptDate() {
+        return receiptDate;
     }
 
-    public void setReceipt_date(Date receipt_date) {
-        this.receipt_date = receipt_date;
+    public void setReceiptDate(Date receiptDate) {
+        this.receiptDate = receiptDate;
     }
 }

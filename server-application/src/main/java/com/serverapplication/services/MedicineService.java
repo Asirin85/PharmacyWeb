@@ -1,17 +1,22 @@
 package com.serverapplication.services;
 
 import com.serverapplication.domain.Medicine;
+import com.serverapplication.modelsAPI.MedicineAPI;
 
 import java.util.List;
 
 public interface MedicineService {
-    Medicine getById(Long id);
+    MedicineAPI getById(Long id);
 
-    List<Medicine> save(Medicine medicine);
+    List<MedicineAPI> save(MedicineAPI medicineAPI);
 
-    List<Medicine> delete(Long id);
+    List<MedicineAPI> delete(Long id);
 
-    List<Medicine> getAll();
+    List<MedicineAPI> getAll();
 
-    List<Medicine> update(Medicine medicine);
+    List<MedicineAPI> update(MedicineAPI medicineAPI);
+
+    Medicine convertToEntity(MedicineAPI medicineAPI);
+
+    MedicineAPI convertToAPI(Medicine medicine);
 }
