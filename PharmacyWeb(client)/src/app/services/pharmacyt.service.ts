@@ -2,11 +2,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ConstLib} from '../const.lib';
 import {Pharmacyt} from '../models/pharmacyt';
+import * as moment from 'moment';
 
 @Injectable()
 export class PharmacytService {
 
   constructor(private http: HttpClient) {
+  }
+
+  getTime(work: string) {
+    var time = moment(work, 'HH:mm');
+    var timeRet = {hour: time.hour(), minute: time.minute()};
+    return timeRet;
   }
 
   getAll() {

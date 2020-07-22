@@ -15,12 +15,16 @@
       </thead>
       <tbody>
       <tr>
-        <td><input [(ngModel)]="pharmacyts.phar_numb" placeholder="Номер аптеки"></td>
-        <td><input [(ngModel)]="pharmacyts.comp_name" placeholder="Компания"></td>
+        <td><input [(ngModel)]="pharmacyts.pharNumb" placeholder="Номер аптеки"></td>
+        <td><input [(ngModel)]="pharmacyts.compName" placeholder="Компания"></td>
         <td><input [(ngModel)]="pharmacyts.address" placeholder="Адрес"></td>
-        <td><input [(ngModel)]="pharmacyts.phone_num" placeholder="Номер телефона"></td>
-        <td><input [(ngModel)]="pharmacyts.work_start" placeholder="Начало работы"></td>
-        <td><input [(ngModel)]="pharmacyts.work_end" placeholder="Окончание работы"></td>
+        <td><input [(ngModel)]="pharmacyts.phoneNum" placeholder="Номер телефона"></td>
+        <td>
+          <ngb-timepicker size="small" [(ngModel)]="timeStart"></ngb-timepicker>
+        </td>
+        <td>
+          <ngb-timepicker size="small" [(ngModel)]="timeEnd"></ngb-timepicker>
+        </td>
       </tr>
       </tbody>
     </table>

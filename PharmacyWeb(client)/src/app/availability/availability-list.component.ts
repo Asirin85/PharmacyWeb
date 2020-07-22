@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Availability} from '../models/availability';
 import {Router} from '@angular/router';
 import {AvailabilityService} from '../services/availability.service';
-import {Medicine} from '../models/medicine';
 import {AuthenticateService} from '../services/authenticate.service';
 
 @Component({

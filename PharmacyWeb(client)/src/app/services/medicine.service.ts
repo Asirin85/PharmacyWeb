@@ -28,4 +28,10 @@ export class MedicineService {
   add(medicine: Medicine) {
     return this.http.post(ConstLib.WEB_URL + '/med', medicine);
   }
+
+  getDate(receipt: Date) {
+    var date = new Date(receipt);
+    var datePick = {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+    return datePick;
+  }
 }

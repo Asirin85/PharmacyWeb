@@ -1,7 +1,8 @@
 <div class="container">
   <h1 class="text-center">Список аптек</h1>
   <div class="container row justify-content-center">
-    <h5 class="text-danger" [hidden]="!error">Ошибка изменения данных, проверьте правильность введенных данных:</h5>
+    <h5 class="text-danger" [hidden]="!updError">Ошибка изменения данных, проверьте правильность введенных данных:</h5>
+    <h5 class="text-danger" [hidden]="!delError">Ошибка удаления данных, существует связь с другим списком </h5>
     <table class="table table-bordered">
       <thead class="thead-dark no-wrap">
       <tr>
@@ -16,13 +17,17 @@
       </thead>
       <tbody>
       <tr *ngIf="pharmacyts">
-        <td>{{pharmacyts.id_phar}}</td>
-        <td><input [(ngModel)]="pharmacyts.phar_numb" placeholder="Номер аптеки"></td>
-        <td><input [(ngModel)]="pharmacyts.comp_name" placeholder="Компания"></td>
+        <td>{{pharmacyts.idPhar}}</td>
+        <td><input [(ngModel)]="pharmacyts.pharNumb" placeholder="Номер аптеки"></td>
+        <td><input [(ngModel)]="pharmacyts.compName" placeholder="Компания"></td>
         <td><input [(ngModel)]="pharmacyts.address" placeholder="Адрес"></td>
-        <td><input [(ngModel)]="pharmacyts.phone_num" placeholder="Номер телефона"></td>
-        <td><input [(ngModel)]="pharmacyts.work_start" placeholder="Начало работы"></td>
-        <td><input [(ngModel)]="pharmacyts.work_end" placeholder="Окончание работы"></td>
+        <td><input [(ngModel)]="pharmacyts.phoneNum" placeholder="Номер телефона"></td>
+        <td>
+          <ngb-timepicker size="small" [(ngModel)]="timeStart"></ngb-timepicker>
+        </td>
+        <td>
+          <ngb-timepicker size="small" [(ngModel)]="timeEnd"></ngb-timepicker>
+        </td>
       </tr>
       </tbody>
     </table>

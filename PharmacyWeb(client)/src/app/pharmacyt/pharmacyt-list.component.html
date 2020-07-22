@@ -15,14 +15,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let pharmacyt of pharmacyts" (click)="router.navigate(['/phar/'+pharmacyt.id_phar])">
-        <td>{{pharmacyt.id_phar}}</td>
-        <td>{{pharmacyt.phar_numb}}</td>
-        <td>{{pharmacyt.comp_name}}</td>
+      <tr *ngFor="let pharmacyt of pharmacyts" (click)="router.navigate(['/phar/'+pharmacyt.idPhar])">
+        <td>{{pharmacyt.idPhar}}</td>
+        <td>{{pharmacyt.pharNumb}}</td>
+        <td>{{pharmacyt.compName}}</td>
         <td>{{pharmacyt.address}}</td>
-        <td>{{pharmacyt.phone_num}}</td>
-        <td>{{pharmacyt.work_start}}</td>
-        <td>{{pharmacyt.work_end}}</td>
+        <td>{{pharmacyt.phoneNum}}</td>
+        <td>{{pharmacyt.workStart}}</td>
+        <td>{{pharmacyt.workEnd}}</td>
       </tr>
       </tbody>
     </table>

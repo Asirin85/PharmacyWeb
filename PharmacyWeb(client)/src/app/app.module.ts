@@ -4,7 +4,7 @@ import {Injectable, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {PharmacytListComponent} from './pharmacyt/pharmacyt-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {MedicineListComponent} from './medicine/medicine-list.component';
 import {AvailabilityListComponent} from './availability/availability-list.component';
 import {PharmacytDetailComponent} from './pharmacyt/detail/pharmacyt-detail.component';
@@ -16,9 +16,10 @@ import {AvailabilityAddComponent} from './availability/add/availability-add.comp
 import {MedicineAddComponent} from './medicine/add/medicine-add.component';
 import {LoginComponent} from './authentication/login.component';
 import {AuthenticateService} from './services/authenticate.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: '/phar', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'phar', component: PharmacytListComponent},
   {path: 'med', component: MedicineListComponent},
@@ -66,7 +67,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [AuthenticateService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
   bootstrap: [AppComponent]

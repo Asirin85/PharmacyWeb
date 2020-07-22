@@ -6,3 +6,7 @@
 .no-wrap {
   white-space: nowrap;
 }
+.btn-margin{
+  margin-left: 1px;
+  margin-bottom: 3px;
+}

@@ -1,9 +1,9 @@
 export class Pharmacyt {
-  id_phar: number;
-  work_start: string;
-  work_end: string;
-  phone_num: string;
-  comp_name: string;
+  idPhar: number;
+  workStart: string;
+  workEnd: string;
+  phoneNum: string;
+  compName: string;
   address: string;
-  phar_numb: number;
+  pharNumb: number;
 }

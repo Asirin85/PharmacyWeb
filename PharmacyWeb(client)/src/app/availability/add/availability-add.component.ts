@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Availability} from '../../models/availability';
 import {AvailabilityService} from '../../services/availability.service';
 import {AuthenticateService} from '../../services/authenticate.service';
+import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,13 @@ export class AvailabilityAddComponent {
 
   availabilities: Availability = new Availability();
   error: boolean = false;
+  date: NgbDateStruct = {
+    year: 2020,
+    month: 1,
+    day: 1
+  };
 
-  constructor(private auth: AuthenticateService, public router: Router, private httpService: AvailabilityService) {
+  constructor(private auth: AuthenticateService, public router: Router, private httpService: AvailabilityService, private parserFormatter: NgbDateParserFormatter) {
   }
 
   ngOnInit() {
@@ -26,6 +32,7 @@ export class AvailabilityAddComponent {
   }
 
   add() {
+    this.availabilities.receiptDate = new Date(this.parserFormatter.format(this.date));
     this.httpService.add(this.availabilities).subscribe(() => {
       this.router.navigate(['avail']);
       this.error = false;

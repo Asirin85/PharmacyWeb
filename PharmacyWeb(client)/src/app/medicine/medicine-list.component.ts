@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Medicine} from '../models/medicine';
 import {Router} from '@angular/router';
 import {MedicineService} from '../services/medicine.service';
-import {Pharmacyt} from '../models/pharmacyt';
 import {AuthenticateService} from '../services/authenticate.service';
 
 @Component({

@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  authorized() {
+    return this.auth.isUserLoggedIn();
+  }
+
   ngOnInit(): void {
   }
 }

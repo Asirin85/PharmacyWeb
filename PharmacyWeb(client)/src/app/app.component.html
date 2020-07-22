@@ -1,4 +1,4 @@
-<ul class="nav nav-pills top-left-m">
+<ul class="nav nav-pills top-left-m" [hidden]="!authorized()">
   <li class="nav-item pill-color">
     <a class="nav-link pill-color" routerLink="/phar" routerLinkActive="active">Аптеки</a>
   </li>
@@ -8,10 +8,11 @@
   <li class="nav-item pill-color">
     <a class="nav-link" routerLink="/avail" routerLinkActive="active">Наличие лекарств</a>
   </li>
-  <li class="nav-item pill-color">
+  <li class="nav-item pill-color" [hidden]="authorized()">
     <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+  </li>
+  <li class="nav-item pill-color" [hidden]="!authorized()">
+    <a class="nav-link" routerLink="/login" routerLinkActive="active" (click)="logout()">Logout</a>
   </li>
 </ul>
 <router-outlet></router-outlet>
-
-

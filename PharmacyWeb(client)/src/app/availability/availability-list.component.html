@@ -14,18 +14,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let availability of availabilities" (click)="router.navigate(['/avail/'+availability.id_rec])">
-        <td>{{availability.id_rec}} </td>
-        <td>{{availability.id_med_fk}}</td>
-        <td>{{availability.id_phar_fk}}</td>
+      <tr *ngFor="let availability of availabilities" (click)="router.navigate(['/avail/'+availability.idRec])">
+        <td>{{availability.idRec}} </td>
+        <td>{{availability.idMed}}</td>
+        <td>{{availability.idPhar}}</td>
         <td>{{availability.price}}</td>
         <td>{{availability.amount}}</td>
-        <td>{{availability.receipt_date}}</td>
+        <td>{{availability.receiptDate}}</td>
       </tr>
       </tbody>
     </table>
+
   </div>
   <div [hidden]="authenticated()">
     <h6 class="text-center">Войдите, чтобы увидеть базу данных</h6>
   </div>
 </div>
+

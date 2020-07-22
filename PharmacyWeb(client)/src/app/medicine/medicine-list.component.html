@@ -13,12 +13,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let medicine of medicines" (click)="router.navigate(['/med/'+medicine.id_med])">
-        <td>{{medicine.id_med}}</td>
-        <td>{{medicine.med_name}}</td>
-        <td>{{medicine.med_category}}</td>
-        <td>{{medicine.med_rel_form}}</td>
-        <td>{{medicine.expiration_date}}</td>
+      <tr *ngFor="let medicine of medicines" (click)="router.navigate(['/med/'+medicine.idMed])">
+        <td>{{medicine.idMed}}</td>
+        <td>{{medicine.medName}}</td>
+        <td>{{medicine.medCategory}}</td>
+        <td>{{medicine.medRelForm}}</td>
+        <td>{{medicine.expirationDate}}</td>
       </tr>
       </tbody>
     </table>

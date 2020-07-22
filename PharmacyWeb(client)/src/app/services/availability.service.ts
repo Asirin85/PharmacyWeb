@@ -28,4 +28,10 @@ export class AvailabilityService {
   add(availability: Availability) {
     return this.http.post(ConstLib.WEB_URL + '/avail', availability);
   }
+
+  getDate(receipt: Date) {
+    var date = new Date(receipt);
+    var datePick = {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+    return datePick;
+  }
 }

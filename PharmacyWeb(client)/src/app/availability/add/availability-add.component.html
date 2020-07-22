@@ -14,11 +14,13 @@
       </thead>
       <tbody>
       <tr>
-        <td><input [(ngModel)]="availabilities.id_med_fk" placeholder="ID лекарства"></td>
-        <td><input [(ngModel)]="availabilities.id_phar_fk" placeholder="ID аптеки"></td>
+        <td><input [(ngModel)]="availabilities.idMed" placeholder="ID лекарства"></td>
+        <td><input [(ngModel)]="availabilities.idPhar" placeholder="ID аптеки"></td>
         <td><input [(ngModel)]="availabilities.price" placeholder="Цена"></td>
         <td><input [(ngModel)]="availabilities.amount" placeholder="Количество"></td>
-        <td><input [(ngModel)]="availabilities.receipt_date" placeholder="Дата поступления"></td>
+        <td><input [(ngModel)]="date" type="text" ngbDatepicker #d="ngbDatepicker"/>
+          <button class="btn btn-outline-secondary" (click)="d.toggle()">Date</button>
+        </td>
       </tr>
       </tbody>
     </table>
