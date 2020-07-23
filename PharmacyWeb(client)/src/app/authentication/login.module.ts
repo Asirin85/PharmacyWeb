@@ -4,9 +4,10 @@ import {LoginComponent} from './login.component';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
-  imports:[FormsModule,
+  imports: [FormsModule,
     LoginRoutingModule
   ],
   declarations: [LoginComponent]
 })
-export class LoginModule{ }
+export class LoginModule {
+}

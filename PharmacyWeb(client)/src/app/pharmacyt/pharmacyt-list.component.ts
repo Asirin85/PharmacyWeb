@@ -20,6 +20,8 @@ export class PharmacytListComponent implements OnInit {
   ngOnInit() {
     if (this.authenticated()) {
       this.httpService.getAll().subscribe((data: Pharmacyt[]) => this.pharmacyts = data);
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 

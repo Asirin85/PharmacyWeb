@@ -20,6 +20,8 @@ export class AvailabilityListComponent implements OnInit {
   ngOnInit() {
     if (this.authenticated()) {
       this.httpService.getAll().subscribe((data: Availability[]) => this.availabilities = data);
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 

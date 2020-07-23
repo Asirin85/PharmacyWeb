@@ -20,6 +20,8 @@ export class MedicineListComponent implements OnInit {
   ngOnInit() {
     if (this.authenticated()) {
       this.httpService.getAll().subscribe((data: Medicine[]) => this.medicines = data);
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
