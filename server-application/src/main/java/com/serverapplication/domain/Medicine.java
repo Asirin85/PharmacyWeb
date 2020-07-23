@@ -21,8 +21,7 @@ public class Medicine {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Samara")
     private Date expirationDate;
 
-    public Medicine() {
-        availabilities = new ArrayList<>();
+    public Medicine(){
     }
 
     public Medicine(String medName, String medCategory, String medRelForm, Date expirationDate) {
@@ -30,11 +29,10 @@ public class Medicine {
         this.medCategory = medCategory;
         this.medRelForm = medRelForm;
         this.expirationDate = expirationDate;
-        availabilities = new ArrayList<>();
     }
 
     public List<Availability> getAvailabilities() {
-        return new ArrayList<Availability>(availabilities);
+        return availabilities;
     }
 
     public void addAvailabilities(Availability availability) {

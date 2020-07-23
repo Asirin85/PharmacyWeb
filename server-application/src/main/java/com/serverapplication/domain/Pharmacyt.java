@@ -22,7 +22,6 @@ public class Pharmacyt {
     private Integer pharNumb;
 
     public Pharmacyt() {
-        availabilities = new ArrayList<>();
     }
 
     public Pharmacyt(String workStart, String workEnd, String phoneNum, String compName, String address, Integer pharNumb) {
@@ -32,11 +31,10 @@ public class Pharmacyt {
         this.compName = compName;
         this.address = address;
         this.pharNumb = pharNumb;
-        availabilities = new ArrayList<>();
     }
 
     public List<Availability> getAvailabilities() {
-        return new ArrayList<Availability>(availabilities);
+        return availabilities;
     }
 
     public void addAvailabilities(Availability availability) {
