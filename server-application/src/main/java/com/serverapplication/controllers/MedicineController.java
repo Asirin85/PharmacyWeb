@@ -1,40 +1,44 @@
 package com.serverapplication.controllers;
 
-import com.serverapplication.domain.Medicine;
+import com.serverapplication.modelsAPI.MedicineAPI;
 import com.serverapplication.services.MedicineService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/med")
 public class MedicineController {
 
-    @Autowired
     private MedicineService medicineService;
 
+    public MedicineController(MedicineService medicineService) {
+        this.medicineService = medicineService;
+    }
+
+    @GetMapping(value = "{id}")
+    public MedicineAPI getOne(@PathVariable("id") Long id) {
+        return medicineService.getById(id);
+    }
+
     @GetMapping
-    public List<Medicine> med(){
+    public List<MedicineAPI> med() {
         return medicineService.getAll();
     }
 
     @PostMapping
-    public List<Medicine> addMed(@RequestParam String med_name, @RequestParam Date expiration_date, @RequestParam String med_category,
-                      @RequestParam String med_rel_form){
-       Medicine medicine = new Medicine(med_name,med_category,med_rel_form,expiration_date);
-       medicineService.save(medicine);
-       return medicineService.getAll();
+    public List<MedicineAPI> addMed(@RequestBody MedicineAPI medicineAPI) {
+        return medicineService.save(medicineAPI);
     }
+
     @DeleteMapping(value = "{id}")
-    public List<Medicine> delAvail(@PathVariable("id") Long id){
-        medicineService.delete(id);
-        return  medicineService.getAll();
+    public List<MedicineAPI> delAvail(@PathVariable("id") Long id) {
+        return medicineService.delete(id);
     }
+
     @PutMapping
-    public List<Medicine> updAvail(@RequestBody Medicine medicine){
-        medicineService.save(medicine);
-        return medicineService.getAll();
+    public List<MedicineAPI> updAvail(@RequestBody MedicineAPI medicineAPI) {
+        return medicineService.update(medicineAPI);
     }
 }

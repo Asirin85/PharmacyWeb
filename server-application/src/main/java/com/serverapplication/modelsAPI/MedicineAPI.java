@@ -1,54 +1,26 @@
-package com.serverapplication.domain;
+package com.serverapplication.modelsAPI;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-public class Medicine {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MedicineAPI {
     private Long idMed;
-    @OneToMany(mappedBy = "medicine", fetch = FetchType.LAZY)
-    private List<Availability> availabilities = new ArrayList<Availability>();
-
     private String medName;
     private String medCategory;
     private String medRelForm;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Samara")
     private Date expirationDate;
 
-    public Medicine() {
-        availabilities = new ArrayList<>();
+    public MedicineAPI() {
     }
 
-    public Medicine(String medName, String medCategory, String medRelForm, Date expirationDate) {
+    public MedicineAPI(Long idMed, String medName, String medCategory, String medRelForm, Date expirationDate) {
+        this.idMed = idMed;
         this.medName = medName;
         this.medCategory = medCategory;
         this.medRelForm = medRelForm;
         this.expirationDate = expirationDate;
-        availabilities = new ArrayList<>();
-    }
-
-    public List<Availability> getAvailabilities() {
-        return new ArrayList<Availability>(availabilities);
-    }
-
-    public void addAvailabilities(Availability availability) {
-        if (availabilities.contains(availability))
-            return;
-        availabilities.add(availability);
-        availability.setMedicine(this);
-    }
-
-    public void removeAvailabilities(Availability availability) {
-        if (!availabilities.contains(availability))
-            return;
-        availabilities.remove(availability);
-        availability.setMedicine(null);
     }
 
     public Long getIdMed() {

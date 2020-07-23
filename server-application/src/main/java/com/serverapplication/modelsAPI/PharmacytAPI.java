@@ -1,19 +1,7 @@
-package com.serverapplication.domain;
+package com.serverapplication.modelsAPI;
 
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-public class Pharmacyt {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PharmacytAPI {
     private Long idPhar;
-    @OneToMany(mappedBy = "pharmacyt", fetch = FetchType.LAZY)
-    private List<Availability> availabilities = new ArrayList<Availability>();
-
-
     private String workStart;
     private String workEnd;
     private String phoneNum;
@@ -21,36 +9,17 @@ public class Pharmacyt {
     private String address;
     private Integer pharNumb;
 
-    public Pharmacyt() {
-        availabilities = new ArrayList<>();
+    public PharmacytAPI() {
     }
 
-    public Pharmacyt(String workStart, String workEnd, String phoneNum, String compName, String address, Integer pharNumb) {
+    public PharmacytAPI(Long idPhar, String workStart, String workEnd, String phoneNum, String compName, String address, Integer pharNumb) {
+        this.idPhar = idPhar;
         this.workStart = workStart;
         this.workEnd = workEnd;
         this.phoneNum = phoneNum;
         this.compName = compName;
         this.address = address;
         this.pharNumb = pharNumb;
-        availabilities = new ArrayList<>();
-    }
-
-    public List<Availability> getAvailabilities() {
-        return new ArrayList<Availability>(availabilities);
-    }
-
-    public void addAvailabilities(Availability availability) {
-        if (availabilities.contains(availability))
-            return;
-        availabilities.add(availability);
-        availability.setPharmacyt(this);
-    }
-
-    public void removeAvailabilities(Availability availability) {
-        if (!availabilities.contains(availability))
-            return;
-        availabilities.remove(availability);
-        availability.setPharmacyt(null);
     }
 
     public Long getIdPhar() {
