@@ -1,10 +1,6 @@
 package com.serverapplication.modelsAPI;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.serverapplication.domain.Medicine;
-import com.serverapplication.domain.Pharmacyt;
-import com.serverapplication.repos.MedicineRepo;
-import com.serverapplication.repos.PharmacytRepo;
 
 import java.sql.Date;
 
@@ -17,23 +13,6 @@ public class AvailabilityAPI {
     private Integer amount;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Samara")
     private Date receiptDate;
-
-    public void setIdOnMed(Medicine medicine) {
-        this.idMed = medicine.getIdMed();
-    }
-
-    public Medicine getIdOnMed(MedicineRepo medicineRepo) {
-        return medicineRepo.findById(idMed).get();
-    }
-
-    public void setIdOnPhar(Pharmacyt pharmacyt) {
-        this.idPhar = pharmacyt.getIdPhar();
-    }
-
-    public Pharmacyt getIdOnPhar(PharmacytRepo pharmacytRepo) {
-        return pharmacytRepo.findById(idPhar).get();
-    }
-
 
     public AvailabilityAPI() {
     }

@@ -7,8 +7,8 @@ import com.serverapplication.repos.PharmacytRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PharmacytServiceImpl implements PharmacytService {
@@ -43,10 +43,7 @@ public class PharmacytServiceImpl implements PharmacytService {
 
     @Override
     public List<PharmacytAPI> getAll() {
-        List<PharmacytAPI> pharmacytAPIList = new ArrayList<>();
-        for (Pharmacyt pharmacyt: pharmacytRepo.findAll()) {
-            pharmacytAPIList.add(convertToAPI(pharmacyt));
-        }
+        List<PharmacytAPI> pharmacytAPIList = pharmacytRepo.findAll().stream().map(this::convertToAPI).collect(Collectors.toList());
         return pharmacytAPIList;
     }
 

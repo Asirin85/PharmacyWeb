@@ -7,8 +7,8 @@ import com.serverapplication.repos.MedicineRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicineServiceImpl implements MedicineService {
@@ -65,10 +65,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public List<MedicineAPI> getAll() {
-        List<MedicineAPI> medicineAPIList = new ArrayList<>();
-        for (Medicine medicine: medicineRepo.findAll()) {
-            medicineAPIList.add(convertToAPI(medicine));
-        }
+        List<MedicineAPI> medicineAPIList = medicineRepo.findAll().stream().map(this::convertToAPI).collect(Collectors.toList());
         return medicineAPIList;
     }
 }

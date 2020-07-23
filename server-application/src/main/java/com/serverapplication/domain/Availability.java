@@ -1,11 +1,11 @@
 package com.serverapplication.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 public class Availability {
@@ -23,7 +23,7 @@ public class Availability {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_med_fk")
     private Medicine medicine;
-    
+
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Samara")
     private Date receiptDate;
 
@@ -56,7 +56,7 @@ public class Availability {
     }
 
     private boolean sameAsFormerMedicine(Medicine newMedicine) {
-        return medicine == null ? newMedicine == null : medicine.equals(newMedicine);
+        return Objects.equals(medicine, newMedicine);
     }
 
     public Pharmacyt getPharmacyt() {
@@ -76,7 +76,7 @@ public class Availability {
     }
 
     private boolean sameAsFormerPharmacyt(Pharmacyt newPharmacyt) {
-        return pharmacyt == null ? newPharmacyt == null : pharmacyt.equals(newPharmacyt);
+        return Objects.equals(pharmacyt, newPharmacyt);
     }
 
     public Long getIdRec() {

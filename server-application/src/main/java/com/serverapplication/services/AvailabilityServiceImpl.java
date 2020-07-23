@@ -8,8 +8,8 @@ import com.serverapplication.repos.PharmacytRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AvailabilityServiceImpl implements AvailabilityService {
@@ -43,16 +43,16 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         if (availabilityAPI.getIdRec() != null) {
             availability.setIdRec(availabilityAPI.getIdRec());
         }
-        availability.setPharmacyt(availabilityAPI.getIdOnPhar(pharmacytRepo));
-        availability.setMedicine(availabilityAPI.getIdOnMed(medicineRepo));
+        availability.setPharmacyt(pharmacytRepo.findById(availabilityAPI.getIdPhar()).get());
+        availability.setMedicine(medicineRepo.findById(availabilityAPI.getIdMed()).get());
         return availability;
     }
 
     @Override
     public AvailabilityAPI convertToAPI(Availability availability) {
         AvailabilityAPI availabilityAPI = modelMapper.map(availability, AvailabilityAPI.class);
-        availabilityAPI.setIdOnMed(availability.getMedicine());
-        availabilityAPI.setIdOnPhar(availability.getPharmacyt());
+        availabilityAPI.setIdMed(availability.getMedicine().getIdMed());
+        availabilityAPI.setIdPhar(availability.getPharmacyt().getIdPhar());
         return availabilityAPI;
     }
 
@@ -70,10 +70,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public List<AvailabilityAPI> getAll() {
-        List<AvailabilityAPI> listAPI = new ArrayList<>();
-        for (Availability availabilities : availabilityRepo.findAll()) {
-            listAPI.add(convertToAPI(availabilities));
-        }
+        List<AvailabilityAPI> listAPI = availabilityRepo.findAll().stream().map(this::convertToAPI).collect(Collectors.toList());
         return listAPI;
     }
 }
