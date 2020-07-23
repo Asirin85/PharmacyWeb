@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="text-center">Список лекарств</h1>
+  <div class="container row justify-content-center" [hidden]="!authenticated()">
+    <button class="btn btn-outline-secondary" (click)="router.navigate(['/med/add'])">Добавить</button>
+    <table class="table table-bordered table-hover top-buffer">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID лекарства</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Форма выпуска</th>
+        <th>Срок годности</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let medicine of medicines" (click)="router.navigate(['/med/'+medicine.idMed])">
+        <td>{{medicine.idMed}}</td>
+        <td>{{medicine.medName}}</td>
+        <td>{{medicine.medCategory}}</td>
+        <td>{{medicine.medRelForm}}</td>
+        <td>{{medicine.expirationDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div [hidden]="authenticated()">
+    <h6 class="text-center">Войдите, чтобы увидеть базу данных</h6>
+  </div>
+</div>
